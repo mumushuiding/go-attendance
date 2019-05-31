@@ -16,6 +16,8 @@ import (
 func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/attendance/hello", controller.HelloWorld)
+	//--------------------班次------------------------
+	mux.HandleFunc("/attendance/class/save", controller.SaveClass)
 	//配置
 	var config = *config.Config
 	// 启动数据库连接

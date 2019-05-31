@@ -2,6 +2,7 @@ package model
 
 // AttendanceDetail 用户考勤明细
 type AttendanceDetail struct {
+	Model
 	ApproveList    []string   `json:"approveList"`
 	AttendDayTimes float64    `json:"attendDayTimes"`
 	ClassInfo      *ClassInfo `json:"classInfo"`

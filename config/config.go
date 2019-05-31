@@ -13,15 +13,15 @@ type Configuration struct {
 	Port           string
 	ReadTimeout    int
 	WriteTimeout   int
-	DbLogMode      bool
+	DbLogMode      string
 	DbType         string
 	DbName         string
 	DbHost         string
 	DbPort         string
 	DbUser         string
 	DbPassword     string
-	DbMaxIdleConns int
-	DbMaxOpenConns int
+	DbMaxIdleConns string
+	DbMaxOpenConns string
 }
 
 // Config 数据库配置
