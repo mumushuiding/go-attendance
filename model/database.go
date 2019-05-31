@@ -33,7 +33,9 @@ func Setup() {
 	db.DB().SetMaxIdleConns(conf.DbMaxIdleConns)
 	db.DB().SetMaxOpenConns(conf.DbMaxOpenConns)
 	db.Set("gorm:table_options", "ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;").
-		AutoMigrate(&Attendance{}).AutoMigrate(&CrewSchedule{}).AutoMigrate(&ScheduleType{})
+		AutoMigrate(&AttendanceDetail{}).AutoMigrate(&Schedule{}).AutoMigrate(&Class{}).
+		AutoMigrate(&Detail{}).AutoMigrate(&Group{}).AutoMigrate(&Record{}).
+		AutoMigrate(&Schedule{})
 }
 
 // GetTx db启动事务

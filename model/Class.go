@@ -6,8 +6,8 @@ import (
 	"github.com/mumushuiding/util"
 )
 
-// ScheduleType 排班类型
-type ScheduleType struct {
+// Class 排班类型
+type Class struct {
 	Model
 	Sections *Section
 	// 为true,则下班不打卡也不会生成异常
@@ -29,19 +29,27 @@ type ScheduleType struct {
 	// 公司
 	Company string
 	// 创建人
-	Username string
+	UserName string `json:"userName"`
 	// 创建日期
 	CreateTime string `json:"createTime"`
 }
 
-// Section 打卡时间段
-type Section struct {
-	Start ClockTime
-	End   ClockTime
+// ClassInfo 班次信息
+type ClassInfo struct {
+	// 班次名称，如："早班"
+	Name string
+	// 打卡时间段,如："10:00-16:30 "
+	SectionsLabel string `json:"sectionsLabel"`
 }
 
-// ClockTime 打卡时间
-type ClockTime struct {
+// Section 打卡时间段
+type Section struct {
+	Start CheckTime
+	End   CheckTime
+}
+
+// CheckTime 打卡时间
+type CheckTime struct {
 	// 打卡时间，比如:07:00
 	Time     string
 	beginMin int
@@ -49,17 +57,17 @@ type ClockTime struct {
 }
 
 // Save Save
-func (s *ScheduleType) Save() error {
+func (s *Class) Save() error {
 	s.CreateTime = util.FormatDate(time.Now(), util.YYYY_MM_DD_HH_MM_SS)
 	return db.Create(s).Error
 }
 
 // Update Update
-func (s *ScheduleType) Update() error {
-	return db.Model(&ScheduleType{}).Updates(s).Error
+func (s *Class) Update() error {
+	return db.Model(&Class{}).Updates(s).Error
 }
 
-// DelScheduleTypeByID 根据ID删除
-func DelScheduleTypeByID(id int) error {
-	return db.Where("id=?", id).Delete(&ScheduleType{}).Error
+// DelClassByID 根据ID删除
+func DelClassByID(id int) error {
+	return db.Where("id=?", id).Delete(&Class{}).Error
 }
